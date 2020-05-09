@@ -34,14 +34,14 @@ struct SourcesView: View {
 	var body: some View {
 		NavigationView {
 			List(viewModel.sources, id:\.self) { source in
-				Text(source.name!)
+				SourceCell(content: SourceViewModel(from: source)!)
 			}.navigationBarTitle("Sources")
 		}
 	}
 }
 
-class SourceViewModel {
-	@Binding var isActive: Bool!
+class SourceViewModel: ObservableObject {
+	@State var isActive: Bool = false
 
 	var source: Source
 
@@ -51,9 +51,13 @@ class SourceViewModel {
 		isActive = true
 		self.source = source
 	}
+
+	func didTapToggle() {
+		isActive = !isActive
+	}
 }
 
-struct SourceCell {
+struct SourceCell: View {
 	private let imageView = Image.init(systemName: "m.circle.fill")
 	let content: SourceViewModel
 
@@ -61,11 +65,12 @@ struct SourceCell {
 		VStack(alignment: .leading, spacing: 8.0) {
 			HStack {
 				imageView
-				Text(content.source.name ?? "")
-				Spacer()
-				Toggle("", isOn: content.$isActive)
+				Toggle(isOn: content.$isActive) {
+					Text(content.source.name ?? "")
+				}.onTapGesture {
+					self.content.didTapToggle()
+				}
 			}
-
 		}
 	}
 }
