@@ -41,7 +41,7 @@ struct SourcesView: View {
 }
 
 class SourceViewModel: ObservableObject {
-	@State var isActive: Bool = false
+	@Published var isActive: Bool = false
 
 	var source: Source
 
@@ -59,16 +59,17 @@ class SourceViewModel: ObservableObject {
 
 struct SourceCell: View {
 	private let imageView = Image.init(systemName: "m.circle.fill")
-	let content: SourceViewModel
+	@ObservedObject var content: SourceViewModel
 
 	var body : some View {
 		VStack(alignment: .leading, spacing: 8.0) {
 			HStack {
 				imageView
-				Toggle(isOn: content.$isActive) {
+				Toggle(isOn: $content.isActive) {
 					Text(content.source.name ?? "")
 				}.onTapGesture {
 					self.content.didTapToggle()
+
 				}
 			}
 		}
