@@ -8,34 +8,45 @@
 
 import SwiftUI
 
-//struct
-struct HeadLinesView: View {
-//	@ObservedObject var service = ArticleRequestClient()
-	@ObservedObject var viewModel = HeadlinesViewModel()
+enum HeadlineStyle {
+	case text
+	case detail
+}
 
-//	@ObservedObject var headlines =
-	//	@ObservedObject var requestClient = RequestClient(for: Source())
+struct HeadLinesView: View {
+	@ObservedObject var viewModel = HeadlinesViewModel()
+	@State private var uiStyle: HeadlineStyle = .text
 
 	var body: some View {
 		NavigationView {
-			List(viewModel.headlines, id:\.self) { article in
-				VStack {
-					NavigationLink(destination: HeadlineDetailsView(content: article)) {
-						HeadlineCell(content: article)
-					}
-				}.frame(
-					maxWidth: .infinity,
-					maxHeight: .infinity,
-					alignment: .topLeading
-				)
-					.background(Color.red)
-			}.navigationBarTitle("Headlines")
+			VStack {
+				List(viewModel.headlines, id:\.self) { article in
+					VStack {
+						NavigationLink(destination: HeadlineDetailsView(content: article)) {
+							HeadlineCell(content: article)
+						}
+					}.frame(
+						maxWidth: .infinity,
+						maxHeight: .infinity,
+						alignment: .topLeading
+					)
+						.background(Color.red)
+				}
+
+				  Picker("Numbers", selection: $uiStyle) {
+					Text("text").tag(2)
+					Text("detail").tag(1)
+				  }
+				  .pickerStyle(SegmentedPickerStyle())
+			}
+
+			.navigationBarTitle("Headlines")
 		}
 	}
 }
 
 struct HeadlineCell: View {
-	private let imageView = Image.init(systemName: "m.circle.fill")
+	private let imageView = Image(systemName: "m.circle.fill")
 	let content: Headline
 
 	var body : some View {
@@ -44,10 +55,6 @@ struct HeadlineCell: View {
 
 			HStack {
 				Text(content.title ?? "").lineLimit(5)
-				Spacer()
-				//				imageView.fixedSize(horizontal: true, vertical: true)
-				//					.frame(width: 150, height: 150, alignment: .center)
-
 			}
 
 			Text(content.publishedAt ?? "").frame(width: .none, height: 20, alignment: .leading)
