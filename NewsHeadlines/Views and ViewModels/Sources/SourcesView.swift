@@ -69,7 +69,6 @@ struct SourceCell: View {
 					Text(content.source.name ?? "")
 				}.onTapGesture {
 					self.content.didTapToggle()
-
 				}
 			}
 		}
