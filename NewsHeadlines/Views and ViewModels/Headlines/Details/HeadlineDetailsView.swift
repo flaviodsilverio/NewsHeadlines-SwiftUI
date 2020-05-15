@@ -10,15 +10,44 @@ import Foundation
 import SwiftUI
 import Combine
 import WebKit
+//https://www.vadimbulavin.com/asynchronous-swiftui-image-loading-from-url-with-combine-and-swift/
+
+//https://schwiftyui.com/swiftui/downloading-and-caching-images-in-swiftui/
+
+struct ImageCacheKey: EnvironmentKey {
+    static let defaultValue: ImageCache = TemporaryImageCache()
+}
+
+extension EnvironmentValues {
+    var imageCache: ImageCache {
+        get { self[ImageCacheKey.self] }
+        set { self[ImageCacheKey.self] = newValue }
+    }
+}
+
+protocol ImageCache {
+    subscript(_ url: URL) -> UIImage? { get set }
+}
+
+struct TemporaryImageCache: ImageCache {
+    private let cache = NSCache<NSURL, UIImage>()
+
+    subscript(_ key: URL) -> UIImage? {
+        get { cache.object(forKey: key as NSURL) }
+        set { newValue == nil ? cache.removeObject(forKey: key as NSURL) : cache.setObject(newValue!, forKey: key as NSURL) }
+    }
+}
 
 class ImageLoader: ObservableObject {
 	@Published var image: UIImage?
 
 	private var cancellable: AnyCancellable?
 	private let url: URL
+    private var cache: ImageCache?
 
-	init(url: URL) {
+	init(url: URL, cache: ImageCache? = nil) {
 		self.url = url
+        self.cache = cache
 	}
 
 	deinit {
@@ -33,6 +62,10 @@ class ImageLoader: ObservableObject {
 			.assign(to: \.image, on: self)
 	}
 
+    private func cache(_ image: UIImage?) {
+        image.map { cache?[url] = $0 }
+    }
+
 	func cancel() {
 		cancellable?.cancel()
 	}
@@ -45,9 +78,10 @@ struct AsyncImage<Placeholder: View>: View {
 
 	init(url: URL,
 		 placeholder: Placeholder? = nil,
+		 cache: ImageCache? = nil,
 		 contentMode: ContentMode? = .fill) {
 
-		loader = ImageLoader(url: url)
+		loader = ImageLoader(url: url, cache: cache)
 		self.placeholder = placeholder
 		self.contentMode = contentMode
 	}
