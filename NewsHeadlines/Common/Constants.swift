@@ -13,6 +13,10 @@ enum Constants {
 		static let key = "089a45e102de40d48bc67393d42446cb"
 		static let baseURL = "https://newsapi.org/v2"
 	}
+    class CoreData {
+        class EntityNames {
+            static let sources = "Sources"
+        }
+    }
 }
-
 

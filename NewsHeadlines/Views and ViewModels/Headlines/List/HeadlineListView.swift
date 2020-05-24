@@ -14,7 +14,7 @@ enum HeadlineStyle {
 }
 
 struct HeadLinesView: View {
-	@ObservedObject var viewModel = HeadlinesViewModel()
+	@ObservedObject var viewModel = HeadlineListViewModel()
 	@State private var uiStyle: HeadlineStyle = .text
 
 	var body: some View {

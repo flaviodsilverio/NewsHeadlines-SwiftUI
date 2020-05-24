@@ -7,33 +7,56 @@
 //
 
 import Foundation
+import Combine
 
 class RequestClient<T: APIGetable>: ObservableObject {
-	let requestManager = RequestManager.shared
+	let fetcher = Fetcher.shared
 	var type: T.Type?
 
 	@Published var responseData: APIResponse?
+
+    var test: AnyCancellable?
 
 	init(for type: T.Type) {
 		self.type = type
 	}
 
+    //Non-Combine
 	func getData(completion: @escaping ((_ apiResponse: APIResponse?, _ error: Error?)->())) {
-		requestManager.perform(requestFor: T.urlParameter) { (data, error) in
+		fetcher.fetch(requestWith: T.urlParameter) { (data, error) in
 			guard error == nil,
-				let data = data else {
-					print("error")
+				let data = data,
+                let parsedData = Parser.parse(data) else {
+					completion(nil, error)
 					return
 			}
-
-			do {
-				let object = try JSONDecoder().decode(APIResponse.self, from: data)
-				completion(object, nil)
-
-			} catch {
-				print(error)
-			}
-
+            completion(parsedData, nil)
 		}
 	}
-}
+        //Combine
+        func getData() {
+            guard let urlString = RequestBuilder.buildRequest(for: T.urlParameter) else { return }
+            test = fetcher.fetch(requestWith: urlString)
+                .mapError { error -> Error in
+                    return error
+                }
+                .sink(receiveCompletion: { _ in },
+                  receiveValue: { data in
+
+                    let object = Parser.parse(data)
+                    self.responseData = object
+                })
+        }
+    }
+
+    class Parser {
+        static func parse(_ data: Data) -> APIResponse? {
+            do {
+                let object = try JSONDecoder().decode(APIResponse.self, from: data)
+                return object
+
+            } catch {
+                return nil
+            }
+        }
+    }

@@ -20,4 +20,11 @@ struct Source: Codable, Hashable, APIGetable {
 	var url: String?
 	var language: String?
 	var country: String?
+    var isActive: Bool?
+}
+
+class TemporarySourceManager {
+    static let shared = TemporarySourceManager()
+
+    var activeSources = [String]()
 }

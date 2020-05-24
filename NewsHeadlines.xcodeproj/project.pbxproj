@@ -18,7 +18,7 @@
 		9866403A245FF65F006F2B05 /* HeadlineDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98664039245FF65F006F2B05 /* HeadlineDetailsView.swift */; };
 		989F607D2455BDA7008EF34C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989F607C2455BDA7008EF34C /* Constants.swift */; };
 		989F60822455BF72008EF34C /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989F60812455BF72008EF34C /* NewsResponse.swift */; };
-		989F60842455BFC5008EF34C /* HeadlinesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989F60832455BFC5008EF34C /* HeadlinesViewModel.swift */; };
+		989F60842455BFC5008EF34C /* HeadlineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989F60832455BFC5008EF34C /* HeadlineListViewModel.swift */; };
 		989F60862455C564008EF34C /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989F60852455C564008EF34C /* RequestManager.swift */; };
 		989F60882455C57F008EF34C /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989F60872455C57F008EF34C /* RequestClient.swift */; };
 		98F0CA8E2454B33C00B9273A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F0CA8D2454B33C00B9273A /* AppDelegate.swift */; };
@@ -60,7 +60,7 @@
 		98664039245FF65F006F2B05 /* HeadlineDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineDetailsView.swift; sourceTree = "<group>"; };
 		989F607C2455BDA7008EF34C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		989F60812455BF72008EF34C /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
-		989F60832455BFC5008EF34C /* HeadlinesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlinesViewModel.swift; sourceTree = "<group>"; };
+		989F60832455BFC5008EF34C /* HeadlineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineListViewModel.swift; sourceTree = "<group>"; };
 		989F60852455C564008EF34C /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		989F60872455C57F008EF34C /* RequestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
 		98F0CA8A2454B33C00B9273A /* NewsHeadlines.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsHeadlines.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +104,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B606D2B24793FAA00D2755B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		982ABBD024668B09002CFC1C /* Views and ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +125,7 @@
 		982ABBD124668B21002CFC1C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1B606D2B24793FAA00D2755B /* CoreData */,
 				982ABBD224668B2F002CFC1C /* Source.swift */,
 				982ABBD424668B4D002CFC1C /* Headline.swift */,
 				982ABBD624668B63002CFC1C /* APIGetable.swift */,
@@ -128,7 +136,7 @@
 		982ABBD824668BA6002CFC1C /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				989F60832455BFC5008EF34C /* HeadlinesViewModel.swift */,
+				989F60832455BFC5008EF34C /* HeadlineListViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -442,7 +450,7 @@
 				9866403A245FF65F006F2B05 /* HeadlineDetailsView.swift in Sources */,
 				982ABBD324668B2F002CFC1C /* Source.swift in Sources */,
 				982ABBE224668D0D002CFC1C /* SourcesView.swift in Sources */,
-				989F60842455BFC5008EF34C /* HeadlinesViewModel.swift in Sources */,
+				989F60842455BFC5008EF34C /* HeadlineListViewModel.swift in Sources */,
 				982ABBCE246576E8002CFC1C /* Extensions.swift in Sources */,
 				989F607D2455BDA7008EF34C /* Constants.swift in Sources */,
 				982ABBD724668B63002CFC1C /* APIGetable.swift in Sources */,

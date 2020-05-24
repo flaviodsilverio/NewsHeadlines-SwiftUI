@@ -21,6 +21,12 @@ class SourcesViewModel: ObservableObject {
 		requestClient.getData() { (response, error) in
 			guard let sources = response?.sources else { return }
 
+            sources.forEach { source in
+                guard let id = source.id else { return }
+
+                TemporarySourceManager.shared.activeSources.append(id)
+            }
+
 			DispatchQueue.main.async {
 				self.sources = sources
 			}
