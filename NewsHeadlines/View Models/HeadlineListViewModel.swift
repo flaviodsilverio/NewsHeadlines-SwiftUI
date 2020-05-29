@@ -10,29 +10,17 @@ import Foundation
 import Combine
 
 class HeadlineListViewModel: ObservableObject {
-	@Published var headlines = [Headline]()
+    @Published var headlines = [Headline]()
 
     let fetcher = Fetcher.shared
 
     var cancellables: [AnyCancellable] = []
 
-	let requestClient = RequestClient(for: Headline.self)
-
 	init() {
-		getCombineData()
+		getData()
 	}
 
-	func getData() {
-		requestClient.getData() { (response, error) in
-			guard let headlines = response?.articles else { return }
-
-			DispatchQueue.main.async {
-				self.headlines = headlines
-			}
-		}
-	}
-
-    func getCombineData() {
+    func getData() {
         fetcher.fetch(requestWith: RequestBuilder.buildRequest(for: Headline.self)!)
         .mapError { error -> Error in
             return error

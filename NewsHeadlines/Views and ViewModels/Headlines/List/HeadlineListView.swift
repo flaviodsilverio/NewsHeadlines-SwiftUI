@@ -20,10 +20,10 @@ struct HeadLinesView: View {
 	var body: some View {
 		NavigationView {
 			VStack {
-				List(viewModel.headlines, id:\.self) { article in
+                List(viewModel.headlines, id:\.self) { headline in
 					VStack {
-						NavigationLink(destination: HeadlineDetailsView(content: article)) {
-							HeadlineCell(content: article)
+						NavigationLink(destination: HeadlineDetailsView(content: headline)) {
+							HeadlineCell(content: headline)
 						}
 					}.frame(
 						maxWidth: .infinity,
