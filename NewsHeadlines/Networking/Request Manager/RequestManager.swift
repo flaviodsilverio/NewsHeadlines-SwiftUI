@@ -76,16 +76,17 @@ enum APIError: Error, LocalizedError {
 }
 
 class RequestBuilder {
-    static func buildRequest(for type: String) -> URL? {
-        return URL(string: Constants.API.baseURL + "/" + type + "?country=us&apiKey=" + Constants.API.key)
+    static func buildRequest(for type: String, page p: Int? = 1) -> URL? {
+        let string = Constants.API.baseURL + "/" + type + "?country=us&apiKey=" + Constants.API.key + "&page=" + "\(p ?? 1)"
+        return URL(string: string)
     }
 
-    static func buildRequest<T: APIGetable>(for type: T.Type) -> URL? {
+    static func buildRequest<T: APIGetable>(for type: T.Type, page p: Int?) -> URL? {
         switch type {
         case is Headline.Type:
-            return buildRequest(for: T.urlParameter)
+            return buildRequest(for: T.urlParameter, page: p)
         case is Source.Type:
-            return buildRequest(for: T.urlParameter)
+            return buildRequest(for: T.urlParameter, page: p)
         default:
             return nil
         }

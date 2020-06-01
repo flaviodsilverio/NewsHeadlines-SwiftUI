@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B606D2E2483C1A100D2755B /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B606D2D2483C1A100D2755B /* ActivityIndicator.swift */; };
 		982ABBCE246576E8002CFC1C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982ABBCD246576E8002CFC1C /* Extensions.swift */; };
 		982ABBD324668B2F002CFC1C /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982ABBD224668B2F002CFC1C /* Source.swift */; };
 		982ABBD524668B4D002CFC1C /* Headline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982ABBD424668B4D002CFC1C /* Headline.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B606D2D2483C1A100D2755B /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		982ABBCD246576E8002CFC1C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		982ABBD224668B2F002CFC1C /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		982ABBD424668B4D002CFC1C /* Headline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headline.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			children = (
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		1B606D2C2483C18900D2755B /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B606D2D2483C1A100D2755B /* ActivityIndicator.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		982ABBD024668B09002CFC1C /* Views and ViewModels */ = {
@@ -268,6 +278,7 @@
 		98F0CA8C2454B33C00B9273A /* NewsHeadlines */ = {
 			isa = PBXGroup;
 			children = (
+				1B606D2C2483C18900D2755B /* Custom Views */,
 				98F0CA9B2454B33D00B9273A /* Info.plist */,
 				982ABBD824668BA6002CFC1C /* View Models */,
 				982ABBD124668B21002CFC1C /* Models */,
@@ -453,6 +464,7 @@
 				989F60842455BFC5008EF34C /* HeadlineListViewModel.swift in Sources */,
 				982ABBCE246576E8002CFC1C /* Extensions.swift in Sources */,
 				989F607D2455BDA7008EF34C /* Constants.swift in Sources */,
+				1B606D2E2483C1A100D2755B /* ActivityIndicator.swift in Sources */,
 				982ABBD724668B63002CFC1C /* APIGetable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
